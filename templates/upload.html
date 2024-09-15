@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mp3 upload page</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Upload Page</title>
+    <script>
+        function showProcessing() {
+            document.getElementById('processing').style.display = 'block';
+        }
+    </script>
+</head>
 
-    <body>
-        <head>upload multiple mp3 file</head>
-        <form action="/upload" method="POST" enctype = "multipart/form-data">
-            <input type="file" name="mp3_files" id="mp3Files" multiple accept="audio/mpeg">
-            <button type="submit"> upload and concate</button>
-        </form>
-        {% if download_link%}
-            <h3> download combine file: </h3>
-            <a href="{{ download_link }}" download> click here to download </a>
-        {% endif %}
-    </body>
+<body>
+    <h1>Upload Multiple MP3 Files</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showProcessing()">
+        <input type="file" name="mp3_files" id="mp3Files" multiple accept="audio/mpeg">
+        <button type="submit">Upload and Concatenate</button>
+    </form>
+    
+    <div id="processing" style="display: none;">
+        <p>Processing...</p>
+    </div>
 
+    {% if download_link %}
+        <h3>Download Combined File:</h3>
+        <a href="{{ download_link }}" download>Click here to download</a>
+    {% endif %}
+</body>
 </html>
